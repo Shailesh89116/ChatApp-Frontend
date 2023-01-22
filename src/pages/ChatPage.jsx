@@ -2,20 +2,19 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { Box } from "@chakra-ui/react";
-import SideDrawer from "../components/miscellenious/SideDrawer";
-import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../reducer/authReducer";
+import SideDrawer from "../components/miscellenious/SideDrawer";   
 import { useNavigate } from "react-router-dom";
 import MyChats from "../components/miscellenious/MyChats";
 import ChatBox from "../components/miscellenious/ChatBox";
+import { ChatState } from "../context/ChatProvider";
 
 const Chatpage = () => {
   
-  
-
-  const {payload}=useSelector(state=>state.auth.user)
   const data= localStorage.getItem('userInfo');
   const user=JSON.parse(data);
+
+  // const {user}=ChatState();
+  // console.log(user);
   const navigate=useNavigate();
   useEffect(()=>{
     if(!user){

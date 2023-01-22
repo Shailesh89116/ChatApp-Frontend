@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Input, Text, Tooltip, useDisclosure, useToast } from "@chakra-ui/react";
+import { Avatar, Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Input, Spinner, Text, Tooltip, useDisclosure, useToast } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
 import {
@@ -17,20 +17,25 @@ import ProfileModal from "./ProfileModal";
 import axios from "axios";
 import ChatLoading from "../ChatLoading";
 import UserListItem from "../userAvatar/UserListItem";
+import { ChatState } from "../../context/ChatProvider";
 
 const SideDrawer = () => {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingChat, setLoadingChat] = useState();
-
+  
+  const { chats, setChats}=ChatState();
+ 
   const data= localStorage.getItem('userInfo');
   const user=JSON.parse(data);
   
+ 
+
   const navigate = useNavigate();
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef()
+  
 
   const logout = () => {
     localStorage.removeItem('userInfo');
@@ -99,10 +104,14 @@ const SideDrawer = () => {
 
       const {data}= await axios.post(`http://localhost:5000/api/chat`,{userId},config);
       console.log(data);
-      setSelectedChat(data);
+
+      if(!chats.find((c)=>c._id === data._id)) setChats([data,...chats]);
+      
+     
       setLoadingChat(false);
       onClose();
       } catch (error) {
+        console.log(error);
         toast({
           title: "Error Occured!",
           status: "warning",
@@ -126,7 +135,7 @@ const SideDrawer = () => {
       >
         <Tooltip label="Search User to Chat" hasArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>
-            <i class="fas fa-search"></i>
+            <i className="fas fa-search"></i>
             <Text display={{ base: "none", md: "flex" }} px="4">
               Search User
             </Text>
@@ -164,7 +173,7 @@ const SideDrawer = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader borderBottonWidth='1px'>Search User</DrawerHeader>
+          <DrawerHeader borderBottomWidth='1px'>Search User</DrawerHeader>
           <DrawerBody>
             <Box display="flex" paddingBottom={2}>
             <Input placeholder='Search by Name or Email' mr={2} value={search} onChange={(e)=> setSearch(e.target.value)} />
@@ -180,6 +189,7 @@ const SideDrawer = () => {
                 <UserListItem key={user._id} user={user} handleFunction={()=>accessChat(user._id)}/>
               )
             }))}
+            {loadingChat && <Spinner ml="auto" display="flex"/>}
           </DrawerBody>
         </DrawerContent>
       </Drawer>

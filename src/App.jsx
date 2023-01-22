@@ -1,16 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
-import { Outlet } from 'react-router-dom'
+import "./App.css";
+import LoginPage from "./Pages/LoginPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Chatpage from "./Pages/ChatPage";
+import ChatProvider from "./context/ChatProvider";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-    <Outlet/>
-    </>
-  )
+     <ChatProvider>
+    <Routes>
+      <Route path="/" element={<LoginPage/>} />
+      <Route path="/chats" element={<Chatpage/>}  />
+      </Routes>
+      </ChatProvider>
+   
+  );
 }
 
-export default App
+export default App;

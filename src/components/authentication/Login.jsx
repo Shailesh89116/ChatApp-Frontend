@@ -4,8 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import { setUser } from '../../reducer/authReducer';
+
 
 const Login = () => {
     const [show,setShow]=useState(false);
@@ -16,7 +15,7 @@ const Login = () => {
 
     const toast=useToast();
     const navigate=useNavigate();
-    const dispatch=useDispatch();
+  
     const handleClick=()=>{
         setShow(!show)
     }
@@ -58,7 +57,7 @@ const Login = () => {
             });
             setPicLoading(false);
             localStorage.setItem("userInfo",JSON.stringify(data));
-            dispatch(setUser(user))
+        
             setPicLoading(false);
           }        
           }
