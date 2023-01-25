@@ -14,10 +14,11 @@ import {
     Text,
   } from '@chakra-ui/react'
 import { ViewIcon } from '@chakra-ui/icons'
+import { ChatState } from '../../context/ChatProvider';
 
 const ProfileModal = ({user,children}) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    
+
   return (
     <>
       {children ? (

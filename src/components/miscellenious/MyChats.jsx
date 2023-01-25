@@ -8,11 +8,12 @@ import { AddIcon } from "@chakra-ui/icons";
 import ChatLoading from "../ChatLoading";
 import { useNavigate } from "react-router-dom";
 import { getSender } from "../../config/ChatLogics";
+import GroupChatModal from "./GroupChatModal";
 
-const MyChats = () => {
+const MyChats = ({fetchAgain, setFetchAgain}) => {
   const [loggedUser, setLoggedUser] = useState();
   const { selectedChat, setSelectedChat, setChats, chats } = ChatState();
-
+ 
   useEffect(() => {
     fetchChats();
   }, [loggedUser]);
@@ -21,6 +22,10 @@ const MyChats = () => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
   }, []);
+
+  useEffect(() => {
+    fetchChats();
+  }, [fetchAgain]);
 
   const toast = useToast();
   const navigate = useNavigate();
@@ -38,7 +43,6 @@ const MyChats = () => {
         "http://localhost:5000/api/chat",
         config
       );
-
       setChats(data);
     } catch (error) {
       console.log(error);
@@ -75,6 +79,7 @@ const MyChats = () => {
         alignItems="center"
       >
         My Chats
+        <GroupChatModal fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}>
         <Button
           display="flex"
           fontSize={{ base: "17px", md: "10px", lg: "17px" }}
@@ -82,6 +87,7 @@ const MyChats = () => {
         >
           New Group Chat
         </Button>
+        </GroupChatModal>
       </Box>
       <Box
         display="flex"
@@ -96,6 +102,7 @@ const MyChats = () => {
         {chats ? (
           <Stack overflowY="scroll">
             {chats.map((chat) => {
+              
               return (
                 <Box
                   onClick={() => setSelectedChat(chat)}

@@ -16,7 +16,7 @@ const ChatProvider = ({ children }) => {
  if(userInfo){
   setUser(userInfo);
   navigate("/chats");
-  
+ 
  }else{
   navigate("/")
  }

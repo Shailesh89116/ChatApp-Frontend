@@ -9,7 +9,8 @@ import ChatBox from "../components/miscellenious/ChatBox";
 import { ChatState } from "../context/ChatProvider";
 
 const Chatpage = () => {
-  
+
+  const [fetchAgain,setFetchAgain]=useState(false)
   const data= localStorage.getItem('userInfo');
   const user=JSON.parse(data);
 
@@ -25,8 +26,8 @@ const Chatpage = () => {
     <div style={{ width: "100%" }}>
        {user && <SideDrawer />}
       <Box style={{display:"flex"}} justifyContent="space-between" w="100%" h="91.5vh" p="10px">
-        {user && <MyChats/>}
-        {user &&  <ChatBox />}
+        {user && (<MyChats fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/> )}
+        {user &&  <ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
       </Box>
     </div>
   );
