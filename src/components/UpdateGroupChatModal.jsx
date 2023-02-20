@@ -61,7 +61,7 @@ const UpdateGroupChatModal = ({fetchAgain,setFetchAgain,fetchMessages}) => {
                 }
             };
 
-            const {data}=await axios.put(`http://localhost:5000/api/chat/groupremove`,{
+            const {data}=await axios.put(`http://13.234.77.255:5000/api/chat/groupremove`,{
                 chatId: selectedChat._id, userId:user1._id
             },config);
 
@@ -90,7 +90,7 @@ const UpdateGroupChatModal = ({fetchAgain,setFetchAgain,fetchMessages}) => {
                 }
             };
 
-            const {data}=await axios.put(`http://localhost:5000/api/chat/groupremove`,{
+            const {data}=await axios.put(`http://13.234.77.255:5000/api/chat/groupremove`,{
                 chatId: selectedChat._id, userId:user1._id
             },config);
 
@@ -122,7 +122,7 @@ const UpdateGroupChatModal = ({fetchAgain,setFetchAgain,fetchMessages}) => {
                 }
             };
 
-            const {data}=await axios.put(`http://localhost:5000/api/chat/rename`,{
+            const {data}=await axios.put(`http://13.234.77.255:5000/api/chat/rename`,{
                 chatId: selectedChat._id, chatName: groupName
             },config);
 
@@ -158,7 +158,7 @@ const UpdateGroupChatModal = ({fetchAgain,setFetchAgain,fetchMessages}) => {
                 }
             }
 
-            const {data}=await axios.get(`http://localhost:5000/api/user?search=${query}`,config);
+            const {data}=await axios.get(`http://13.234.77.255:5000/api/user?search=${query}`,config);
            
             setLoading(false);
             setSearchResult(data)
@@ -196,7 +196,7 @@ const UpdateGroupChatModal = ({fetchAgain,setFetchAgain,fetchMessages}) => {
                 }
             };
 
-            const {data}=await axios.put(`http://localhost:5000/api/chat/groupadd`,{
+            const {data}=await axios.put(`http://13.234.77.255:5000/api/chat/groupadd`,{
                 chatId: selectedChat._id, userId:user1._id
             },config);
 

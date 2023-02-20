@@ -55,7 +55,7 @@ const GroupChatModal = ({children,fetchAgain,setFetchAgain}) => {
                 }
             }
 
-            const {data}=await axios.get(`http://localhost:5000/api/user?search=${query}`,config);
+            const {data}=await axios.get(`http://13.234.77.255:5000/api/user?search=${query}`,config);
            
             setLoading(false);
             setSearchResult(data)
@@ -104,7 +104,7 @@ const GroupChatModal = ({children,fetchAgain,setFetchAgain}) => {
                 },
               };
 
-              const {data}=axios.post(`http://localhost:5000/api/chat/group`,{
+              const {data}=axios.post(`http://13.234.77.255:5000/api/chat/group`,{
                 name:groupName,
                 users: JSON.stringify(selectedUser.map(u=> u._id)),
               },config);

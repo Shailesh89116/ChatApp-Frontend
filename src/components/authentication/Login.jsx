@@ -40,7 +40,7 @@ const Login = () => {
                 "content-type": "application/json",
               },
             };
-          const{ data} = await axios.post("http://localhost:5000/api/user/login",
+          const{ data} = await axios.post("http://13.234.77.255:5000/api/user/login",
               { email,password},
               config
             );

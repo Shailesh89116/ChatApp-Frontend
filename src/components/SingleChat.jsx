@@ -14,7 +14,7 @@ import io from 'socket.io-client';
 import Lottie from 'react-lottie';
 import animationData from '../animation/typingAnimation.json'
 
-const ENDPOINT = 'http://localhost:5000';
+const ENDPOINT = 'http://13.234.77.255:5000';
 
 var socket, selectedChatCompare;
 
@@ -81,7 +81,7 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
                 }
             }
             setLoading(true)
-            const {data}=await axios.get(`http://localhost:5000/api/message/${selectedChat._id}`,config);
+            const {data}=await axios.get(`http://13.234.77.255:5000/api/message/${selectedChat._id}`,config);
           
             setMessages(data);
             setLoading(false);
@@ -121,7 +121,7 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
                     }
                 }
 
-                const {data}= await axios.post(`http://localhost:5000/api/message`,{
+                const {data}= await axios.post(`http://13.234.77.255:5000/api/message`,{
                     content: newMessage, chatId: selectedChat._id
                 },config);
 
